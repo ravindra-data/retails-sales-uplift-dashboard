@@ -1,78 +1,120 @@
-# Retail Sales Uplift Dashboard
+# 🛒 Retail Sales Uplift Dashboard
 
-SQL analysis and an interactive Power BI dashboard built on 50,000 retail transactions spanning January 2024 to July 2026 across four regions.
+An end-to-end data analytics project analyzing **50,000 retail transactions** across four regions to uncover sales trends, regional performance, and product/channel behavior, using **MySQL** for structured querying and **Power BI** for interactive visualization.
 
-## Overview
+---
 
-This project analyzes multi-region retail transaction data to surface sales trends, regional performance, product and category insights, and channel/payment behavior. It combines exploratory SQL queries with a Power BI dashboard for stakeholder-facing reporting.
+## 📌 Project Overview
 
-## Dataset
+This project analyzes multi-region retail transaction data spanning January 2024 to July 2026 to answer key business questions around regional sales performance, top-selling products, category trends, and channel/payment behavior — helping translate raw transactional data into actionable business insights.
 
-- **Source file:** `RetailTransactions.csv`
+## Dashboard Screenshot
+![Sales Uplift Dashboard](screenshots/sales-uplift-dashboard.png)
+
+**Workflow:**
+```
+CSV Data → MySQL (SQL Analysis) → Power BI (Dashboard) → Insights & Recommendations
+```
+
+---
+
+## 🗂️ Dataset
+
 - **Rows:** 50,000 transactions
 - **Date range:** 2024-01-01 to 2026-07-27
-- **Fields:** TransactionID, Date, ProductName, Category, Region, SalesChannel, Quantity, UnitPrice, TotalAmount, PaymentMode, CustomerID
+- **Columns:** 11 features
 
-**Dimensions covered:**
-- **Regions:** North, South, East, West
-- **Categories:** Electronics, Clothing, Groceries, Beauty & Personal Care, Home & Kitchen, Sports & Fitness, Books & Stationery
-- **Sales channels:** Online, Offline
-- **Payment modes:** UPI, Credit Card, Cash, Net Banking
-
-## Key metrics
-
-| Metric | Value |
+**Key features:**
+| Category | Fields |
 |---|---|
-| Total sales | $841.49M |
-| Total transactions | 50,000 |
-| Unique customers | 11,832 |
-| Average order value | $16.83K |
-| Total quantity sold | 1,02,677 |
+| Transaction Info | TransactionID, Date, CustomerID |
+| Product Info | ProductName, Category, Quantity, UnitPrice, TotalAmount |
+| Sales Context | Region, SalesChannel, PaymentMode |
 
-## Files in this repo
+---
 
-| File | Description |
-|---|---|
-| `RetailAnalysis.sql` | SQL queries for regional sales, top products, monthly trends, category trend detection (rising/falling), online vs offline comparison, and high-frequency customer identification |
-| `Sales_Uplift_Dashboard.pbix` | Power BI dashboard with KPI cards, monthly sales trend, regional breakdown, product performance, payment mode analysis, and channel split |
-| `RetailTransactions.csv` | Source transaction dataset |
+## 🗄️ SQL Analysis
 
-## SQL analysis included
+`RetailAnalysis.sql` contains 7 business-question queries, including:
 
-1. Total sales per region for the most recent quarter
+1. Total sales amount per region for the last quarter
 2. Top 5 best-selling products by revenue
 3. Monthly sales trend across all regions
 4. Region-wise contribution to total sales (%)
-5. Online vs offline sales comparison across months
-6. Category-level trend detection (rising / falling / no change) using window functions
-7. Customers with more than 10 purchases (loyalty/frequency segment)
+5. Online vs. offline sales comparison across all months
+6. Category-level trend detection (Rising / Falling / No Change) using window functions
+7. Customers who purchased more than 10 times (loyalty/frequency segment)
 
-## Dashboard features
+---
 
-- KPI summary cards (total sales, transactions, customers, AOV, quantity)
+## 📊 Power BI Dashboard
+
+`Sales_Uplift_Dashboard.pbix` — an interactive dashboard with filters for **Month, Region, Sales Channel, and Payment Mode**, featuring:
+
+- KPI cards: $841.49M total sales, 50,000 transactions, 11,832 customers, $16.83K avg. order value
 - Monthly sales trend line chart
 - Regional sales breakdown (donut chart)
 - Top products by sales (bar chart)
 - Sales by payment mode
-- Online vs offline channel split
-- Interactive filters: Month, Region, Sales Channel, Payment Mode
+- Online vs. offline channel split
 
-## Notable finding
+![Dashboard Screenshot](screenshots/sales-uplift-dashboard.png)
 
-Monthly sales and transaction volumes are consistent across the full 2.5-year period (~1,450–1,750 transactions and $24M–$30M per month), with no significant seasonal collapse in any single month. This stability suggests steady demand across the dataset's timeframe rather than sharp seasonal cycles — useful context for forecasting and inventory planning.
+---
 
-## Tools used
+## 🔑 Key Insights
 
-- **MySQL** — data loading, cleaning, and exploratory SQL analysis
-- **Power BI Desktop** — interactive dashboard and DAX measures
-- **DAX** — custom measures for time intelligence and trend calculations
+- **Channel split:** Online sales account for **60.89%** of total revenue ($512.35M) vs. **39.11%** offline ($329.14M).
+- **Regional performance:** East leads with **28.17%** of total sales ($237.07M), followed by North (25.50%), West (25.09%), and South (21.24%) — a relatively balanced spread across regions.
+- **Category concentration:** Electronics dominates category revenue at **$683.99M**, far ahead of Home & Kitchen ($56.01M) and Clothing ($43.90M) combined.
+- **Top products:** Power Bank ($101.61M), Laptop ($100.88M), Tablet ($100.45M), Smartwatch ($100.06M), and Bluetooth Speaker ($94.26M) are the top 5 revenue-generating products, all clustered closely together.
+- **Payment behavior:** UPI is the leading payment mode ($314.72M), followed by Credit Card ($271.44M), Cash ($154.33M), and Net Banking ($101.00M).
+- **Customer loyalty:** Only 52 of 11,832 customers made more than 10 purchases, with a maximum of 16 purchases by a single customer — indicating a largely transactional, low-repeat customer base.
+- **Sales stability:** Monthly sales remain consistent throughout the 2.5-year period (~$24M–$30M per month), with no significant seasonal collapse in any single month.
 
-## How to use
+---
 
-1. Import `RetailTransactions.csv` into MySQL using `RetailAnalysis.sql` as a reference for table structure and analysis queries
-2. Open `Sales_Uplift_Dashboard.pbix` in Power BI Desktop to explore the interactive dashboard
-3. Use the filter panel (Month, Region, SalesChannel, PaymentMode) to drill into specific segments
+## 💡 Business Recommendations
 
-## Author
+- **Double Down on Electronics** – Given its outsized share of revenue, prioritize inventory planning and marketing spend on this category.
+- **Grow Repeat Purchases** – With very few customers exceeding 10 purchases, introduce loyalty incentives to convert one-time buyers into repeat customers.
+- **Strengthen Digital Payments** – UPI's lead suggests continued investment in digital payment UX and incentives could further reduce cash dependency.
+- **Balance Regional Investment** – Since South lags other regions by several points, investigate localized demand drivers or marketing gaps.
+- **Channel Strategy** – With online sales nearly 1.6x offline, ensure offline/in-store experience is not being neglected in favor of digital growth.
 
-Ravindra Kumar
+---
+
+## 🛠️ Tech Stack
+
+| Tool | Purpose |
+|---|---|
+| MySQL | Database storage & SQL querying |
+| Power BI | Interactive dashboard & visualization |
+| DAX | Custom measures & time intelligence |
+
+---
+
+## 📁 Repository Structure
+
+```
+├── RetailTransactions.csv          # Raw transaction dataset
+├── RetailAnalysis.sql              # SQL business-question queries
+├── Sales_Uplift_Dashboard.pbix     # Power BI dashboard
+├── screenshots/                    # Dashboard screenshots
+└── README.md
+```
+
+---
+
+## 🚀 How to Reproduce
+
+1. Clone the repository and create a MySQL database using `RetailAnalysis.sql`.
+2. Load `RetailTransactions.csv` into the `retail_transactions` table (via `LOAD DATA INFILE` or a MySQL import tool).
+3. Run the queries in `RetailAnalysis.sql` to reproduce the SQL-based analysis.
+4. Open `Sales_Uplift_Dashboard.pbix` in Power BI Desktop and refresh the data source to explore the dashboard.
+
+---
+
+## 📄 License
+
+This project is open-sourced for learning and portfolio purposes. Feel free to fork and build upon it.
